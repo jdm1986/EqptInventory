@@ -16,7 +16,7 @@
     </thead>
     <tbody>
         @for (var i = 0; i < Model.MachineCounter; i++)
-        {
+    {
         <tr>
             <td>@Model.Machines[i].Make</td>
             <td>@Model.Machines[i].Model</td>
@@ -24,6 +24,8 @@
             <td>@Model.Machines[i].Hours</td>
             <td>@Html.ActionLink("Detail", "MachineDetail", new { id = Model.Machines[i].Id })</td>
         </tr>
-        }
+    
+}
     </tbody>
 </table>
+<div>@Html.ActionLink("Add", "MachineAdd", null, new { @class = "btn btn-primary" })</div>

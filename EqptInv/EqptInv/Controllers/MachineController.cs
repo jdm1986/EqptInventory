@@ -12,18 +12,12 @@ namespace EqptInv.Controllers
     {
         public static List<Machine> Machines = new List<Machine>
             {
-            new Machine { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 2, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 3, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 4, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 5, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 6, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 7, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 8, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 9, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 10, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 11, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-            new Machine { Id = 12, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 1, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
+            new Machine { Id = 2, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
+            new Machine { Id = 3, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
+            new Machine { Id = 4, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
+            new Machine { Id = 5, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
+           
             };
 
         public ActionResult Index()
