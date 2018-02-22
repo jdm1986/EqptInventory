@@ -1,0 +1,28 @@
+﻿@model EqptInv.Models.MachineViewModel
+@{
+    ViewBag.Title = "Machine Detail";
+}
+
+<h2>@Model.MachineName</h2>
+
+<div class="row">
+    <div class="col-sm-3 form-group">
+        @Html.LabelFor(m => m.Num)
+        <br />#@Html.DisplayFor(m => m.Num)
+    </div>
+    <div class="col-sm-3 form-group">
+        @Html.LabelFor(m => m.Make)
+        <br />@Html.DisplayFor(m => m.Make)
+    </div>
+    <div class="col-sm-3 form-group">
+        @Html.LabelFor(m => m.Model)
+        <br />@Html.DisplayFor(m => m.Model)
+    </div>
+    <div class="col-sm-3 form-group">
+        @Html.LabelFor(m => m.Hours)
+        <br />@Html.DisplayFor(m => m.Hours)
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Done", "Index", null, new { @class = "btn btn-primary" })
+    </div>
+</div>

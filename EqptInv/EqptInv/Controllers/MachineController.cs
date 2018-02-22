@@ -10,31 +10,61 @@ namespace EqptInv.Controllers
 {
     public class MachineController : Controller
     {
-        // GET: Machine
+        public static List<Machine> Machines = new List<Machine>
+            {
+            new Machine { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 2, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 3, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 4, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 5, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 6, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 7, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 8, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 9, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 10, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 11, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            new Machine { Id = 12, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+            };
+
         public ActionResult Index()
         {
             var machineList = new MachineListViewModel
             {
-                Machines = new List<MachineViewModel>
-                    {
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
-                    }
+                Machines = Machines.Select(p => new MachineViewModel
+                {
+                    Id = p.Id,
+                    Num = p.Num,
+                    Make = p.Make,
+                    Model = p.Model,
+                    Hours = p.Hours
+                }).ToList()
+
             };
 
             machineList.MachineCounter = machineList.Machines.Count;
 
             return View(machineList);
+        }
+
+        public ActionResult MachineDetail(int id)
+        {
+            var machine = Machines.SingleOrDefault(p => p.Id == id);
+            if (machine != null)
+            {
+                var machineViewModel = new MachineViewModel
+                {
+                    Id = machine.Id,
+                    Num = machine.Num,
+                    Make = machine.Make,
+                    Model = machine.Model,
+                    Hours = machine.Hours,
+                };
+
+                return View(machineViewModel);
+            }
+
+            return new HttpNotFoundResult();
+
         }
     }
 }

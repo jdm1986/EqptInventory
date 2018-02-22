@@ -13,5 +13,7 @@ namespace EqptInv.Models
         public string Model { get; set; }
         public int? Hours { get; set; }
 
+        public string MachineName => Make + " " + Model + " #" + Num.ToString();
+
     }   
 }
