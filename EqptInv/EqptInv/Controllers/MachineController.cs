@@ -66,5 +66,31 @@ namespace EqptInv.Controllers
             return new HttpNotFoundResult();
 
         }
+
+        public ActionResult MachineAdd()
+        {
+            var machineViewModel = new MachineViewModel();
+
+            return View("AddEditMachine", machineViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddMachine(MachineViewModel machineViewModel)
+        {
+            var nextId = Machines.Max(p => p.Id) + 1;
+
+            var machine = new Machine
+            {
+                Id = nextId,
+                Num = machineViewModel.Num,
+                Make = machineViewModel.Make,
+                Model = machineViewModel.Model,
+                Hours = machineViewModel.Hours
+            };
+
+            Machines.Add(machine);
+
+            return RedirectToAction("Index");
+        }
     }
 }
