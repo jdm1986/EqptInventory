@@ -86,5 +86,47 @@ namespace EqptInv.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult MachineEdit(int id)
+        {
+            var machine = Machines.SingleOrDefault(p => p.Id == id);
+
+            if (machine != null)
+            {
+                var machineViewModel = new MachineViewModel
+                {
+                    Id = machine.Id,
+                    Num = machine.Num,
+                    Make = machine.Make,
+                    Model = machine.Model,
+                    Hours = machine.Hours,
+                };
+
+                return View("AddEditMachine", machineViewModel);
+            }
+
+            return new HttpNotFoundResult();
+        }
+
+        [HttpPost]
+        public ActionResult EditMachine(MachineViewModel machineViewModel)
+        {
+            var machine = Machines.SingleOrDefault(p => p.Id == machineViewModel.Id);
+
+            if (machine != null)
+            {
+                machine.Num = machineViewModel.Num;
+                machine.Make = machineViewModel.Make;
+                machine.Model = machineViewModel.Model;
+                machine.Hours = machineViewModel.Hours;
+
+                return RedirectToAction("Index");
+            }
+
+            return new HttpNotFoundResult();
+
+        }
     }
+
+        
 }
