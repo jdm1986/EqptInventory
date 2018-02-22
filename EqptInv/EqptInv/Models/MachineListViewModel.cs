@@ -9,5 +9,7 @@ namespace EqptInv.Models
     {
         public List<MachineViewModel> Machines { get; set; }
         public int MachineCounter { get; set; }
+
+
     }
 }

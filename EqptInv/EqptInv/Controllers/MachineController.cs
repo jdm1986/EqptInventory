@@ -13,7 +13,28 @@ namespace EqptInv.Controllers
         // GET: Machine
         public ActionResult Index()
         {
-            return View();
+            var machineList = new MachineListViewModel
+            {
+                Machines = new List<MachineViewModel>
+                    {
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                        new MachineViewModel { Id = 1, Num = 900, Make = "CAT", Model = "D8", Hours = 1000},
+                    }
+            };
+
+            machineList.MachineCounter = machineList.Machines.Count;
+
+            return View(machineList);
         }
     }
 }

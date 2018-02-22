@@ -1,0 +1,27 @@
+﻿@model EqptInv.Models.MachineListViewModel
+@{
+    ViewBag.Title = "Equipment Inventory";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <th>Make</th>
+        <th>Model</th>
+        <th>Equipment Number</th>
+        <th>Hours</th>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.MachineCounter; i++)
+        {
+        <tr>
+            <td>@Model.Machines[i].Make</td>
+            <td>@Model.Machines[i].Model</td>
+            <td>@Model.Machines[i].Num</td>
+            <td>@Model.Machines[i].Hours</td>
+
+        </tr>
+        }
+    </tbody>
+</table>

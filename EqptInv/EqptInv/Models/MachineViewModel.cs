@@ -8,9 +8,9 @@ namespace EqptInv.Models
     public class MachineViewModel
     {
         public int? Id { get; set; }
-        public int? EquipNum { get; set; }
-        public string EquipMake { get; set; }
-        public string EquipModel { get; set; }
+        public int? Num { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
         public int? Hours { get; set; }
 
     }   
