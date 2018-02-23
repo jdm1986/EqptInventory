@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using EqptInv.Models;
 
@@ -41,22 +38,24 @@ namespace EqptInv.Controllers
 
         public ActionResult MachineDetail(int id)
         {
-            var machine = Machines.SingleOrDefault(p => p.Id == id);
-            if (machine != null)
+            using (var machineContext = new MachineContext())
             {
-                var machineViewModel = new MachineViewModel
+                var machine = machineContext.Machines.SingleOrDefault(p => p.Id == id);
+                if (machine != null)
                 {
-                    Id = machine.Id,
-                    Num = machine.Num,
-                    Make = machine.Make,
-                    Model = machine.Model,
-                    Hours = machine.Hours,
-                };
+                    var machineViewModel = new MachineViewModel
+                    {
+                        Id = machine.Id,
+                        Num = machine.Num,
+                        Make = machine.Make,
+                        Model = machine.Model,
+                        Hours = machine.Hours,
+                    };
 
-                return View(machineViewModel);
+                    return View(machineViewModel);
+                }
             }
-
-            return new HttpNotFoundResult();
+                return new HttpNotFoundResult();
 
         }
 
@@ -70,38 +69,43 @@ namespace EqptInv.Controllers
         [HttpPost]
         public ActionResult AddMachine(MachineViewModel machineViewModel)
         {
-            var nextId = Machines.Max(p => p.Id) + 1;
-
-            var machine = new Machine
+            using (var machineContext = new MachineContext())
             {
-                Id = nextId,
-                Num = machineViewModel.Num,
-                Make = machineViewModel.Make,
-                Model = machineViewModel.Model,
-                Hours = machineViewModel.Hours
-            };
+                var machine = new Machine
+                {
+                    Num = machineViewModel.Num,
+                    Make = machineViewModel.Make,
+                    Model = machineViewModel.Model,
+                    Hours = machineViewModel.Hours
+                };
 
-            Machines.Add(machine);
+                machineContext.Machines.Add(machine);
+                machineContext.SaveChanges();
+
+            }
+                
 
             return RedirectToAction("Index");
+
         }
 
         public ActionResult MachineEdit(int id)
         {
-            var machine = Machines.SingleOrDefault(p => p.Id == id);
-
-            if (machine != null)
+            using (var machineContext = new MachineContext())
             {
-                var machineViewModel = new MachineViewModel
+                var machine = machineContext.Machines.SingleOrDefault(p => p.Id == id);
+                if (machine != null)
                 {
-                    Id = machine.Id,
-                    Num = machine.Num,
-                    Make = machine.Make,
-                    Model = machine.Model,
-                    Hours = machine.Hours,
-                };
+                    var machineViewModel = new MachineViewModel
+                    {
+                        Num = machine.Num,
+                        Make = machine.Make,
+                        Model = machine.Model,
+                        Hours = machine.Hours,
+                    };
 
-                return View("AddEditMachine", machineViewModel);
+                    return View("AddEditMachine", machineViewModel);
+                }
             }
 
             return new HttpNotFoundResult();
@@ -110,17 +114,21 @@ namespace EqptInv.Controllers
         [HttpPost]
         public ActionResult EditMachine(MachineViewModel machineViewModel)
         {
-            var machine = Machines.SingleOrDefault(p => p.Id == machineViewModel.Id);
-
-            if (machine != null)
+            using (var machineContext = new MachineContext())
             {
-                machine.Num = machineViewModel.Num;
-                machine.Make = machineViewModel.Make;
-                machine.Model = machineViewModel.Model;
-                machine.Hours = machineViewModel.Hours;
+                var machine = machineContext.Machines.SingleOrDefault(p => p.Id == machineViewModel.Id);
 
-                return RedirectToAction("Index");
+                if (machine != null)
+                {
+                    machine.Num = machineViewModel.Num;
+                    machine.Make = machineViewModel.Make;
+                    machine.Model = machineViewModel.Model;
+                    machine.Hours = machineViewModel.Hours;
+
+                    return RedirectToAction("Index");
+                }
             }
+                
 
             return new HttpNotFoundResult();
 
@@ -129,14 +137,18 @@ namespace EqptInv.Controllers
         [HttpPost]
         public ActionResult DeleteMachine(MachineViewModel machineViewModel)
         {
-            var machine = Machines.SingleOrDefault(p => p.Id == machineViewModel.Id);
-
-            if (machine != null)
+            using (var machineContext = new MachineContext())
             {
-                Machines.Remove(machine);
+                var machine = machineContext.Machines.SingleOrDefault(p => p.Id == machineViewModel.Id);
 
-                return RedirectToAction("Index");
+                if (machine != null)
+                {
+                    machineContext.Machines.Remove(machine);
+                    machineContext.SaveChanges();
 
+                    return RedirectToAction("Index");
+
+                }
             }
 
             return new HttpNotFoundResult();
