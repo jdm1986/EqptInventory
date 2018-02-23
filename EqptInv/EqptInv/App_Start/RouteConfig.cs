@@ -16,7 +16,7 @@ namespace EqptInv
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Machine", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

@@ -10,34 +10,33 @@ namespace EqptInv.Controllers
 {
     public class MachineController : Controller
     {
-        public static List<Machine> Machines = new List<Machine>
-            {
-            new Machine { Id = 1, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
-            new Machine { Id = 2, Num = "901", Make = "CAT", Model = "D8", Hours = "1000"},
-            new Machine { Id = 3, Num = "902", Make = "CAT", Model = "D8", Hours = "1000"},
-            new Machine { Id = 4, Num = "903", Make = "CAT", Model = "D8", Hours = "1000"},
-            new Machine { Id = 5, Num = "904", Make = "CAT", Model = "D8", Hours = "1000"},
-           
-            };
-
+       
         public ActionResult Index()
         {
-            var machineList = new MachineListViewModel
+            using (var machineContext = new MachineContext())
             {
-                Machines = Machines.Select(p => new MachineViewModel
                 {
-                    Id = p.Id,
-                    Num = p.Num,
-                    Make = p.Make,
-                    Model = p.Model,
-                    Hours = p.Hours
-                }).ToList()
+                    var machineList = new MachineListViewModel
+                    {
 
-            };
+                        Machines = machineContext.Machines.Select(m => new MachineViewModel
+                        {
+                            Num = m.Num,
+                            Make = m.Make,
+                            Model = m.Model,
+                            Hours = m.Hours
+                        }).ToList()
 
-            machineList.MachineCounter = machineList.Machines.Count;
+                    };
 
-            return View(machineList);
+                    machineList.MachineCounter = machineList.Machines.Count;
+
+                    return View(machineList);
+
+
+                    }
+                }
+
         }
 
         public ActionResult MachineDetail(int id)

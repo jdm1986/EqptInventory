@@ -3,6 +3,10 @@
     padding-bottom: 20px;
 }
 
+nav li {
+    color: #f8f8f8;
+}
+
 #nav-cont {
     background-color: #C51625;
     border-color: #C51625;
