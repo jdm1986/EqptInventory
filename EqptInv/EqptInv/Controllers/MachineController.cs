@@ -13,10 +13,10 @@ namespace EqptInv.Controllers
         public static List<Machine> Machines = new List<Machine>
             {
             new Machine { Id = 1, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
-            new Machine { Id = 2, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
-            new Machine { Id = 3, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
-            new Machine { Id = 4, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
-            new Machine { Id = 5, Num = "900", Make = "CAT", Model = "D8", Hours = "1000"},
+            new Machine { Id = 2, Num = "901", Make = "CAT", Model = "D8", Hours = "1000"},
+            new Machine { Id = 3, Num = "902", Make = "CAT", Model = "D8", Hours = "1000"},
+            new Machine { Id = 4, Num = "903", Make = "CAT", Model = "D8", Hours = "1000"},
+            new Machine { Id = 5, Num = "904", Make = "CAT", Model = "D8", Hours = "1000"},
            
             };
 
@@ -125,6 +125,22 @@ namespace EqptInv.Controllers
 
             return new HttpNotFoundResult();
 
+        }
+
+        [HttpPost]
+        public ActionResult DeleteMachine(MachineViewModel machineViewModel)
+        {
+            var machine = Machines.SingleOrDefault(p => p.Id == machineViewModel.Id);
+
+            if (machine != null)
+            {
+                Machines.Remove(machine);
+
+                return RedirectToAction("Index");
+
+            }
+
+            return new HttpNotFoundResult();
         }
     }
 
